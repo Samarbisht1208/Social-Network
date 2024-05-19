@@ -1,0 +1,80 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <br>
+    <h1 class="heading"><strong>All Posts</strong></h1> 
+    {% if user.is_authenticated %}
+        <div class="new_post_container">
+            <h3><strong> New Post </strong></h3>
+            <form action="{% url 'create_new_post' %}" method="post">
+                {% csrf_token %}
+                <textarea name="new_post_data" class="form-control form-style" placeholder="What's on your mind?" id="floatingTextarea2" style="height: 100px"></textarea>
+                <button type="submit" class="btn btn-primary post-btn">Post</button>
+            </form>
+        </div>
+    {% endif %}
+    
+    {% for i in posts_of_the_page_placeholder %}
+        <br>
+        <div class="all_post">
+            <h5><strong><a href="{% url 'profile' user_id=i.user.id %}">{{ i.user }}</a></strong></h5>
+            {% if i.user == user %}
+                <a data-bs-toggle="modal" data-bs-target="#modal_edit_post_{{ i.id }}" href="#">Edit</a>
+                <div class="modal fade" id="modal_edit_post_{{ i.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fs-5" id="exampleModalLabel">Edit Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea rows="5" id="textarea_{{ i.id }}" class="form-control" name="content">{{ i.thought }}</textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="edit_my_post({{ i.id }})">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <p id="content_{{ i.id }}">{{ i.thought }}</p>
+            <h6 class="timestamp">{{ i.timestamp }}</h6>
+            
+            <div class="likes_count_container">
+                <button class="opaque-button" id="like_handler{{i.id}}" type="button" onclick="like_handler({{ i.id }})">
+                    {% if i.id in likes_placeholder %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="color: red;">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                        </svg>
+                    {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                        </svg>
+                    {% endif %}
+                </button>
+                <p class="likes_count" id="likes_count{{i.id}}">
+                    {% if i.likes != 0 %}
+                        {{ i.likes }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    <hr>
+
+    <!-- pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            {% if posts_of_the_page_placeholder.has_previous %}
+                <li class="page-item" style="margin-right: 5px"><a class="page-link" href="?page={{ posts_of_the_page_placeholder.previous_page_number }}">Previous</a></li>
+            {% endif %} 
+            {% if posts_of_the_page_placeholder.has_next %}
+                <li class="page-item" style="margin-left: 5px"><a class="page-link" href="?page={{ posts_of_the_page_placeholder.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
+

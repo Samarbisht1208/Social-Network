@@ -1,0 +1,122 @@
+/* index */
+.heading{
+    margin-left: 1%;
+}
+
+.new_post_container{
+    width: 98%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.post-btn{
+    margin-top: 3px;
+}
+
+.all_post{
+    width: 98%;
+    border: 2px solid #ccc;
+    margin: 0 auto;
+    padding: 12px;
+}
+hr{
+    background-color: #ccc;
+    width: 98%;
+    height: 1px;
+}
+
+/* profile */
+.background-image{
+    background-color: gray;
+    width: 99%;
+    height: 300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 1.3fr 1.3fr;
+    grid-gap: 10px;
+}
+
+.grid-part-1{
+    margin: auto 35%;
+    text-align: center;
+}
+.profile-photo{
+    width: 200px; 
+    height: 200px; 
+    border-radius: 50%; 
+    overflow: hidden; /* Hide overflow content */
+    border: 3px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.profile-photo img {
+    width: 100%; /* Make the image fill the div */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure image is block-level element */
+}
+.profile_name{
+    margin-top: 5px;
+    font-size: 1.2em;
+}
+
+
+.stats{
+    text-align: center; 
+    margin: auto;
+}
+.tags{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.button-container{
+    padding-left: 47%;
+}
+.mul-button{
+    margin-top: 1%;
+}
+.edit-link{
+    color: white;
+    text-decoration: none; /* Remove underline if needed */
+}
+.edit-link:hover {
+    color: black; /* Change color on hover if desired */
+}
+
+/* profile-edit */
+.profile-edit-form{
+    width: 98%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.opaque-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0%;
+    display: flex; 
+}
+.opaque-button:hover {
+    opacity: 1.0;
+    border: none; 
+}
+.opaque-button:focus {
+    outline: none;
+}
+.likes_count_container{
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the space between the button and paragraph */
+    margin: 0%;
+}
+.likes_count{
+    margin: 0;
+    font-size: 16px;
+}

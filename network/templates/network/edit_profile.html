@@ -1,0 +1,29 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <div class="heading"><h1>Edit Your Profile</h1></div>
+        <br>
+        {% if user == user_placeholder %}
+            <div class="profile-edit-form">
+                <h3><strong> {{ user_placeholder }} </strong></h3>
+                <br>
+
+                <form action="{% url 'edit_profile' user_id=user.id %}" method="post">
+                    {% csrf_token %}
+
+                    <label>Profile Photo:</label>
+                    <input type="text" class="form-control" placeholder="URL for Image" name="image_data">
+                    <br>
+
+                    <label>Profile Name:</label>
+                    <input type="text" class="form-control" placeholder="Name" name="profile_name_data">
+                    <br>
+
+                    <button class="btn btn-success" type="submit">Save</button>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
