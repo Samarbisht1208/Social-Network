@@ -48,9 +48,8 @@ const empty_heart = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
 function like_handler(id){
     const button = document.getElementById(`like_handler${id}`)
     const likes_count = document.getElementById(`likes_count${id}`)
-    console.log(id)
 
-    fetch(`like_handler/${id}`)
+    fetch(`/like_handler/${id}`)
     .then(response => response.json())
     .then(result => {
         button.innerHTML = result.like?red_heart:empty_heart
